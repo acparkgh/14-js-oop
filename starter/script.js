@@ -5,11 +5,17 @@ const Person = function (firstName, birthYear) {
   this.birthYear = birthYear;
 };
 
+Person.hey = function () {
+  console.log("Hey There!!!");
+};
+
+Person.hey();
+
 const jonas = new Person("Jonas", 1991);
 const matilda = new Person("Matilda", 2017);
 const jack = new Person("Jack", 1975);
 
-// console.log(jonas);
+console.log(jonas);
 // console.log(jonas.firstName);
 // console.log(jonas["firstName"]);
 // console.log(matilda);
@@ -45,8 +51,8 @@ Array.prototype.unique = function () {
 
 const arr = [1, 5, 9, 6, 7, 2, 5, 4, 1, 5, 2];
 
-const arrUnique = arr.unique();
-console.log(arrUnique);
+// const arrUnique = arr.unique();
+// console.log(arrUnique);
 
 class PersonCl {
   constructor(fullName, birthYear, gender) {
@@ -105,40 +111,78 @@ class PersonCl {
     this._gender = sex;
   };
 
+  static heyThere() {
+    console.log("Hey there!!!");
+  };
+
 };
 
+PersonCl.heyThere();
 const andrew = new PersonCl("Andrew Park", 1968, "male");
 console.log(andrew);
-console.log(andrew.fullName);
-console.log(andrew._fullName);
-console.log(andrew.birthYear);
-console.log(andrew._gender);
-console.log(andrew.gender);
 
-
-const jessica = new PersonCl("Jessica Davis", 1996);
-
-jessica.calcAge();
-console.log(jessica.age);
-jessica.greet();
-
-
-const account = {
-  owner: "Jonas",
-  movements: [200, 530, 120, 300],
-
-  get latest() {
-    return this.movements.slice(-1).pop();
+const PersonProto = {
+  
+  calcAge: function() {
+    console.log(2037 - this.birthYear);
+  },
+  
+  // init(firstName, birthYear) {
+  init: function(firstName, birthYear) {
+    console.log(this);
+    this.firstName = firstName;
+    this.birthYear = birthYear;
   },
 
-  set latest(mov) {
-    this.movements.push(mov);
-  }
 };
 
-console.log(account.latest);
-account.latest = 50;
-console.log(account.movements);
+const steven = Object.create(PersonProto);
+console.log(steven);
+steven.name = "Steve";
+steven.birthYear = 2002;
+console.log(PersonProto);
+console.log(steven);
+console.log(steven.__proto__);
+
+steven.calcAge();
+
+const sarah = Object.create(PersonProto);
+console.log(sarah);
+sarah.init("Sarah", 1979);
+console.log(sarah);
+
+
+
+// console.log(andrew.fullName);
+// console.log(andrew._fullName);
+// console.log(andrew.birthYear);
+// console.log(andrew._gender);
+// console.log(andrew.gender);
+
+
+// const jessica = new PersonCl("Jessica Davis", 1996);
+
+// jessica.calcAge();
+// console.log(jessica.age);
+// jessica.greet();
+
+
+// const account = {
+//   owner: "Jonas",
+//   movements: [200, 530, 120, 300],
+
+//   get latest() {
+//     return this.movements.slice(-1).pop();
+//   },
+
+//   set latest(mov) {
+//     this.movements.push(mov);
+//   }
+// };
+
+// console.log(account.latest);
+// account.latest = 50;
+// console.log(account.movements);
 
 
 
