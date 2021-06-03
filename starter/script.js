@@ -118,8 +118,32 @@ class PersonCl {
 };
 
 PersonCl.heyThere();
+
+class StudentCl extends PersonCl {
+  constructor(fullName, birthYear, gender, course) {
+    super(fullName, birthYear, gender)
+    this.course = course;
+  };
+   
+  introduce() {
+    console.log(`Hi, my name is ${this.fullName}, and I study ${this.course}.`);
+  };
+
+  calcAge() {
+    console.log(this);
+    console.log(2021 - this.birthYear);
+  }
+};
+
 const andrew = new PersonCl("Andrew Park", 1968, "male");
-// console.log(andrew);
+console.log(andrew);
+
+const kim = new StudentCl("Kim Smith", 1999, "female", "Biology");
+console.log(kim);
+kim.introduce();
+kim.calcAge();
+
+
 
 const PersonProto = {
   
@@ -136,43 +160,42 @@ const PersonProto = {
 
 };
 
+
 console.log("----------- Inheritance ---------------");
 
-const Person = function (firstName, birthYear) {
-  this.firstName = firstName;
-  this.birthYear = birthYear;
-};
+// const Person = function (firstName, birthYear) {
+//   this.firstName = firstName;
+//   this.birthYear = birthYear;
+// };
 
-Person.prototype.calcAge = function () {
-  console.log(2037 - this.birthYear);
-};
+// Person.prototype.calcAge = function () {
+//   console.log(2037 - this.birthYear);
+// };
 
-const Student = function (firstName, birthYear, course) {
-  console.log(this);
+// const Student = function (firstName, birthYear, course) {
+//   console.log(this);
   // this.firstName = firstName;
   // this.birthYear = birthYear;
-  Person.call(this, firstName, birthYear);
-  this.course = course;
-};
+//   Person.call(this, firstName, birthYear);
+//   this.course = course;
+// };
 
-Student.prototype = Object.create(Person.prototype)
-const abc = Object.create(Person.prototype);
-console.log(abc);
-console.log(Person.prototype);
-console.log(Student.prototype);
+// Student.prototype = Object.create(Person.prototype)
+// console.log(Person.prototype);
+// console.log(Student.prototype);
 
 
-Student.prototype.introduce = function () {
-  console.log(`Hi, my name is ${this.firstName} and I study ${this.course}.`);
-}
+// Student.prototype.introduce = function () {
+//   console.log(`Hi, my name is ${this.firstName} and I study ${this.course}.`);
+// }
 
-const mike = new Student("Mike", 2020, "Computer Science");
+// const mike = new Student("Mike", 2020, "Computer Science");
 
-console.log(mike);
-console.log(mike.__proto__);
-console.log(mike.__proto__ === Student.prototype);
-console.log(mike.__proto__.__proto__);
-console.log(mike.__proto__.__proto__ === Person.prototype);
+// console.log(mike);
+// console.log(mike.__proto__);
+// console.log(mike.__proto__ === Student.prototype);
+// console.log(mike.__proto__.__proto__);
+// console.log(mike.__proto__.__proto__ === Person.prototype);
 // mike.introduce();
 
 
@@ -302,10 +325,10 @@ console.log(mike.__proto__.__proto__ === Person.prototype);
 
 /////////////////////// Code Challenge 3 ///////////////////////////
 
-const Car = function (make, speed) {
-  this.make = make;
-  this.speed = speed;
-};
+// const Car = function (make, speed) {
+//   this.make = make;
+//   this.speed = speed;
+// };
 
 // Car.prototype.accelerate = function () {
 //   this.speed += 20;
@@ -313,45 +336,49 @@ const Car = function (make, speed) {
 //   console.log(`${this.make} going at ${this.speed} km/h, with a charge of ${this.charge}.`);
 // };
 
-Car.prototype.brake = function () {
-  this.speed--;
-  console.log(`${this.make} going at ${this.speed} km/h.`);
-};
+// Car.prototype.brake = function () {
+//   this.speed--;
+//   console.log(`${this.make} going at ${this.speed} km/h.`);
+// };
 
-const Ev = function (make, speed, charge) {
-  Car.call(this, make, speed);
-  this.charge = charge;
-};
+// const Ev = function (make, speed, charge) {
+//   Car.call(this, make, speed);
+//   this.charge = charge;
+// };
 
-Ev.prototype = Object.create(Car.prototype);
-const carProto = Object.create(Car.prototype);
-console.log(carProto);
+// Ev.prototype = Object.create(Car.prototype);
+// const carProto = Object.create(Car.prototype);
+// const evProto = Object.create(Ev.prototype);
+// console.log(carProto);
+// console.log(evProto);
+// console.log(Ev.prototype);
+// console.log(Car.prototype);
 
-Ev.prototype.accelerate = function () {
-  this.speed += 20;
-  this.charge -= 1;
-  console.log(`${this.make} going at ${this.speed} km/h, with a charge of ${this.charge}.`);
-};
+// Ev.prototype.accelerate = function () {
+//   this.speed += 20;
+//   this.charge -= 1;
+//   console.log(`${this.make} going at ${this.speed} km/h, with a charge of ${this.charge}.`);
+// };
 
-Ev.prototype.chargeBattery = function (chargeTo) {
-  this.charge = chargeTo;
-};
+// Ev.prototype.chargeBattery = function (chargeTo) {
+//   this.charge = chargeTo;
+// };
 
-const tesla = new Ev("Tesla", 120, 23);
-tesla.chargeBattery(90);
-console.log(tesla);
-tesla.accelerate();
-tesla.accelerate();
-tesla.accelerate();
-tesla.brake();
-tesla.brake();
+// const tesla = new Ev("Tesla", 120, 23);
+// tesla.chargeBattery(90);
+// console.log(tesla);
+// tesla.accelerate();
+// tesla.accelerate();
+// tesla.accelerate();
+// tesla.brake();
+// tesla.brake();
 
-console.log(tesla.__proto__.__proto__ === Car.prototype);
-const abcd = new Car("ABC", 100)
-console.log(abcd);
-console.log(abcd.__proto__);
+// console.log(tesla.__proto__.__proto__ === Car.prototype);
+// const abcd = new Car("ABC", 100)
+// console.log(abcd);
 // console.log(abcd.__proto__);
-console.log(Ev._proto__ === abcd.prototype);
+// console.log(abcd.__proto__);
+// console.log(Ev._proto__ === abcd.prototype);
 
 
 
