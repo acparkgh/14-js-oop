@@ -180,8 +180,57 @@ jay.calcAge();
 
 console.log(jay);
 
+
 // steve.init("Steve", 1998);
 // console.log(steve);
+
+
+class Account {
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currenty = currency;
+    this._pin = pin;
+    this._movements = [];
+    this.local = navigator.language;
+    console.log(`Thank you for opening account ${this.owner}.`);
+  };
+  
+  deposit(val) {
+    this._movements.push(val);
+    return this;
+  };
+
+  withdrawal(val) {
+    this.deposit(-val);
+    return this;
+  };
+
+  getMovements() {
+    return this._movements;
+  };
+
+  _approveLoan(val) {
+    return true;
+  };
+
+  requestLoan(val) {
+    if (this._approveLoan(val)) {
+      this.deposit(val);
+      console.log(`Loan approved for ${val}`);
+      return this;
+    };
+  };
+
+};
+
+const acct1 = new Account("Jonas", "EUR", 1111);
+console.log(acct1.deposit(500));
+acct1.withdrawal(300);
+acct1.requestLoan(1000);
+console.log(acct1);
+console.log(acct1._movements);
+console.log(acct1.getMovements());
+
 
 
 console.log("----------- Inheritance ---------------");
@@ -401,9 +450,60 @@ console.log("----------- Inheritance ---------------");
 // console.log(abcd.__proto__);
 // console.log(Ev._proto__ === abcd.prototype);
 
+/////////////////////// Code Challenge 4 ///////////////////////////
 
+class CarCl {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  };
 
+  accelerate() {
+    this.speed += 10;
+    console.log(`${this.car} is going at ${this.speed}`);
+  };
 
+  brake() {
+    this.speed -= 5;
+    console.log(`${this.car} is going at ${this.speed}`);
+  };
 
+  get speedUS() {
+    return this.speed / 1.6;
+  };
+
+  set speedUS(speed) {
+    this.speed = speed * 1.6;
+  };
+};
+
+class EVCl extends CarCl{
+  
+  constructor(make, speed, charge) {
+    super(make, speed);
+    this.charge = charge;
+  };
+
+  accelerate() {
+    // console.log(this);
+    this.speed += 20;
+    this.charge -= 1;
+    console.log(`${this.make} going at ${this.speed} km/h, with a charge of ${this.charge}.`);
+    return this;
+  };
+  
+  chargeBattery(chargeTo) {
+    this.charge = chargeTo;
+    console.log(`${this.make} is charged to ${this.charge}.`);
+    return this;
+  };
+  
+};
+
+const evCar = new EVCl("Prius", 100, 35);
+console.log(evCar);
+evCar.accelerate();
+evCar.chargeBattery(60);
+evCar.chargeBattery(99).accelerate();
 
 
