@@ -160,6 +160,29 @@ const PersonProto = {
 
 };
 
+// const steve = Object.create(PersonProto);
+
+const StudentProto = Object.create(PersonProto)
+const jay = Object.create(StudentProto);
+
+StudentProto.init = function (firstName, birthYear, course) {
+  PersonProto.init.call(this, firstName, birthYear);
+  this.course = course;
+};
+
+StudentProto.introduce = function () {
+  console.log(`Hi, my name is ${this.firstName}, and I study ${this.course}.`);
+};
+
+jay.init("Jay", 1998, "Education");
+jay.introduce();
+jay.calcAge();
+
+console.log(jay);
+
+// steve.init("Steve", 1998);
+// console.log(steve);
+
 
 console.log("----------- Inheritance ---------------");
 
@@ -174,8 +197,6 @@ console.log("----------- Inheritance ---------------");
 
 // const Student = function (firstName, birthYear, course) {
 //   console.log(this);
-  // this.firstName = firstName;
-  // this.birthYear = birthYear;
 //   Person.call(this, firstName, birthYear);
 //   this.course = course;
 // };
